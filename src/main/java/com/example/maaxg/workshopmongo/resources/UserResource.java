@@ -45,4 +45,12 @@ public class UserResource {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+                            //Para o spring ler o obj
+    public ResponseEntity<Void> update(@RequestBody UserDTO objDTO, @PathVariable String id){
+        User user = service.fromDTO(objDTO);
+        user.setId(id);
+        user = service.update(user);
+        return ResponseEntity.noContent().build();
+    }
 }
