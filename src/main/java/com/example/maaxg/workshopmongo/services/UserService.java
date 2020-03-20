@@ -15,7 +15,7 @@ public class UserService {
     public UserRepository repository;
 
     public List<User> findAll(){
-        return repository.findAll(;
+        return repository.findAll();
     }
 
 }
