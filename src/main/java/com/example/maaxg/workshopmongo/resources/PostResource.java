@@ -3,6 +3,7 @@ package com.example.maaxg.workshopmongo.resources;
 import com.example.maaxg.workshopmongo.domain.Post;
 import com.example.maaxg.workshopmongo.domain.User;
 import com.example.maaxg.workshopmongo.dto.UserDTO;
+import com.example.maaxg.workshopmongo.resources.util.URL;
 import com.example.maaxg.workshopmongo.services.PostService;
 import com.example.maaxg.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class PostResource {
         Post post = service.findById(id);
         return ResponseEntity.ok().body(post);
     }
-
+    @RequestMapping(value ="/titlesearch", method = RequestMethod.GET)
+                                            //Para o endpoint identificar o parametro q vc passar na URL
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
+    }
 
 }
