@@ -35,4 +35,12 @@ public class PostResource {
         return ResponseEntity.ok().body(list);
     }
 
+    @RequestMapping(value ="/titlesearchmg", method = RequestMethod.GET)
+    //Para o endpoint identificar o parametro q vc passar na URL
+    public ResponseEntity<List<Post>> findByTitleMongo(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitleMong(text);
+        return ResponseEntity.ok().body(list);
+    }
+
 }
